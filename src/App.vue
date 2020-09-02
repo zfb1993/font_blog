@@ -17,12 +17,20 @@ export default {
 </script>
 
 <style>
+*,body{
+  padding: 0;
+  margin: 0;
+}
+body{
+  background: url("./assets/img/backgroud.png");
+  background-repeat: repeat-y;
+  background-position-x: -80px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="sider-bar">
+    <div class="sider-bar" >
 
     </div>
 </template>
@@ -12,17 +12,12 @@
               curHeight:0,
           }
         },
-        beforeMount() {
-            let h = document.documentElement.clientHeight || document.body.clientHeight
-            this.curHeight = h
-        }
     }
 </script>
 
 <style lang="scss" scoped>
 .sider-bar{
     width: 320px;
-    background: url("../assets/img/backgroud.png");
-    background-repeat: repeat-y;
+    float: left;
 }
 </style>
