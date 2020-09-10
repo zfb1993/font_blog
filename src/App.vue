@@ -20,9 +20,16 @@ export default {
 *,body{
   padding: 0;
   margin: 0;
+  color: #CECECE;
+}
+a{
+  text-decoration: none;
+}
+li{
+  list-style: none;
 }
 body{
-  background: url("./assets/img/backgroud.png");
+  background: #2d4356 url("./assets/img/backgroud.png");
   background-repeat: repeat-y;
   background-position-x: -80px;
 }
