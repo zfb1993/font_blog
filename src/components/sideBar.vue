@@ -42,9 +42,11 @@
 
 <style lang="scss" scoped>
 .sider-bar{
+    transition: all ease-out 0.5s;
+    animation: 0.5s ease-out showmenu;
     width: 320px;
     float: left;
-    position: relative;
+    position: absolute;
     .h-head{
         padding: 45px 0;
         text-align: left;

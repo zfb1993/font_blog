@@ -14,30 +14,17 @@
     export default {
         name: "Home",
         computed:{
-            ...mapState(['toggle'])
+            ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
             sideBar,container,blogHeader
         },
         data(){
             return {
-                sideBarClass:'',
-                containerClass:'',
                 flag:false
             }
         },
         methods:{
-            toggleClass(){
-                if(this.flag){
-                    this.sideBarClass = 'show'
-                    this.containerClass = 'translate'
-                    this.flag = false
-                }else{
-                    this.sideBarClass = ''
-                    this.containerClass = ''
-                    this.flag = true
-                }
-            }
         }
     }
 </script>

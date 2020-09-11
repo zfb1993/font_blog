@@ -10,8 +10,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
     name:'blog-header',
+    computed:{
+        ...mapState(['toggle','sideBarClass','containerClass'])
+    },
     data(){
         return {
 
@@ -19,6 +23,7 @@ export default {
     },
     methods:{
         showSideBar(){
+            this.$store.commit('changeToggle')
         }
     }
 }

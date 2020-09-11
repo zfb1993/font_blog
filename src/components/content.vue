@@ -110,6 +110,7 @@
 }
 @media print, screen and (max-width: 800px) {
   .container{
+      transition: all ease-out 0.5s;
       .content{
           padding-left: 5%;
           padding-right: 5%;
