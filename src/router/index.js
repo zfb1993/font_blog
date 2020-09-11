@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 import Home from '../view/Home'
 import About from '../view/About'
 import detail from '../view/detail'
+import archives from '../view/archives'
 
 export  default new VueRouter({
     routes:[
@@ -24,6 +25,11 @@ export  default new VueRouter({
             path:'/detail',
             name:"detail",
             component:detail
+        },
+        {
+            path:'/archives',
+            name:"archives",
+            component:archives
         }
     ]
 })
