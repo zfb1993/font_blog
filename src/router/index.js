@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router'
 import Home from '../view/Home'
 import About from '../view/About'
+import detail from '../view/detail'
 
 export  default new VueRouter({
     routes:[
@@ -19,5 +20,10 @@ export  default new VueRouter({
             name:"About",
             component:About
         },
+        {
+            path:'/detail',
+            name:"detail",
+            component:detail
+        }
     ]
 })
