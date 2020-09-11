@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+        <layout></layout>
         <blog-header @click="toggleClass()" ref="blogHeader"></blog-header>
         <sideBar :class="sideBarClass"></sideBar>
         <blogDetail :class="containerClass"></blogDetail>
@@ -7,8 +8,7 @@
 </template>
 
 <script>
-    import sideBar from '../components/sideBar'
-    import blogHeader from '../components/blog-header'
+    import layout from '../components/layout'
     import blogDetail from '../components/blog-detail'
     import {mapState} from 'vuex'
     export default {
@@ -17,7 +17,7 @@
             ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
-            sideBar,blogDetail,blogHeader
+            layout,blogDetail
         },
         data(){
             return {

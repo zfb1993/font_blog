@@ -1,15 +1,13 @@
 <template>
     <div class="home">
-        <blogHeader @click="toggleClass()" ref="blogHeader"></blogHeader>
-        <sideBar :class="sideBarClass"></sideBar>
-        <container :class="containerClass"></container>
+        <layout></layout>
+        <indexContent :class="containerClass"></indexContent>
     </div>
 </template>
 
 <script>
-    import sideBar from '../components/sideBar'
-    import container from '../components/content'
-    import blogHeader from '../components/blog-header'
+    import layout from '../components/layout'
+    import indexContent from '../components/content'
     import {mapState} from 'vuex'
     export default {
         name: "Home",
@@ -17,7 +15,7 @@
             ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
-            sideBar,container,blogHeader
+            layout,indexContent
         },
         data(){
             return {
