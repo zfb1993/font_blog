@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="content">
-            <div class="item">
+            <div class="item" v-for="(item,index) in lists" :key="index">
                 <div class="item-content">
                         <div class="content-title">
                                 python之给pdf添加页码
@@ -38,7 +38,14 @@
 
 <script>
     export default {
-        name: "layout"
+        name: "layout",
+        data(){
+            return {
+                lists:[
+                    1,2,3,4,5,6
+                ]
+            }
+        }
     }
 </script>
 
@@ -64,6 +71,7 @@
                 background-color: #263949;
                 box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
                 .content-title{
+                    padding-top: 1em;
                     font-size: 30px;
                     font-weight: bold;
                 }
@@ -80,7 +88,48 @@
                     }
                 }
             }
+            .p-info{
+                padding-top: 20px;
+                padding-left: 20px;
+                text-align: left;
+                font-size: 12px;
+                padding-bottom: 40px;
+                span{
+                    margin-left: 20px;
+                    i{
+                        color: #999;
+                    }
+                    a{
+                        color: #999;
+                        margin-left: 5px;
+                    }
+                }
+            }
         }
     }
+}
+@media print, screen and (max-width: 800px) {
+  .container{
+      .content{
+          padding-left: 5%;
+          padding-right: 5%;
+          .item{
+              .item-content{
+                  padding:0;
+                  padding-left: 15px;
+                  padding-right: 20px;
+                  position: static;
+                  width: 100%;
+                  box-sizing: border-box;
+                  .content-text{
+                      margin: 10px;
+                  }
+                  .p-readmore{
+                      padding-bottom: 1.5em;
+                  }
+              }
+          }
+      }
+  }
 }
 </style>

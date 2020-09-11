@@ -40,4 +40,12 @@ body{
   text-align: center;
   color: #2c3e50;
 }
+@media print, screen and (max-width: 800px) {
+  body{
+    background: #2d4356 ;
+  }
+  .sider-bar{
+    display: none;
+  }
+}
 </style>
