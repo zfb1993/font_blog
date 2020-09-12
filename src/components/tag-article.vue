@@ -1,7 +1,7 @@
 <template>
     <div class="archive">
         <section class="content">
-            <h1>Archives</h1>
+            <h1>Linux</h1>
             <div class="lists">
                 <h2>2020</h2>
                 <ul>
@@ -30,16 +30,18 @@
                 </ul>
             </div>
         </section>
-        <pages></pages>
+        <page></page>
     </div>
 </template>
 
 <script>
-import pages from './pages'
+import page from './pages'
+
 export default {
+    name: "category-article",
     components:{
-        pages
-    }
+        page
+    },
 }
 </script>
 

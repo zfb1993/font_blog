@@ -1,10 +1,12 @@
 import VueRouter from 'vue-router'
 import Home from '../view/Home'
 import About from '../view/About'
-import detail from '../view/detail'
-import archives from '../view/archives'
-import categories from '../view/categories'
-import categoryArticle from '../view/categoryArticle'
+import Detail from '../view/Detail'
+import Archives from '../view/Archives'
+import Categories from '../view/Categories'
+import CategoryArticle from '../view/CategoryArticle'
+import Tags from '../view/Tags'
+import TagArticle from '../view/TagArticle'
 
 export  default new VueRouter({
     routes:[
@@ -24,24 +26,34 @@ export  default new VueRouter({
             component:About
         },
         {
-            path:'/detail',
-            name:"detail",
-            component:detail
+            path:'/Detail',
+            name:"Detail",
+            component:Detail
         },
         {
-            path:'/archives',
-            name:"archives",
-            component:archives
+            path:'/Archives',
+            name:"Archives",
+            component:Archives
         },
         {
-            path:'/categories',
-            name:"categories",
-            component:categories
+            path:'/Categories',
+            name:"Categories",
+            component:Categories
         },
         {
-            path:'/categoryArticle',
-            name:"categoryArticle",
-            component:categoryArticle
+            path:'/CategoryArticle',
+            name:"CategoryArticle",
+            component:CategoryArticle
+        },
+        {
+            path:'/Tags',
+            name:"Tags",
+            component:Tags
+        },
+        {
+            path:'/TagArticle',
+            name:"TagArticle",
+            component:TagArticle
         },
     ]
 })

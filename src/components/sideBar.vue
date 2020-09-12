@@ -16,10 +16,10 @@
            </p>
            <div class="m-nav">
                <ul>
-                   <li @click="jumpTo('archives')">归档</li>
-                   <li @click="jumpTo('categories')">分类</li>
-                   <li @click="jumpTo()">标签</li>
-                   <li @click="jumpTo()">关于</li>
+                   <li @click="jumpTo('Archives')">归档</li>
+                   <li @click="jumpTo('Categories')">分类</li>
+                   <li @click="jumpTo('Tags')">标签</li>
+                   <li @click="jumpTo('About')">关于</li>
                    <li class="m-sch">搜索</li>
                </ul>
 
@@ -87,9 +87,14 @@
               padding: 0 65px 0 45px;
             }
             li{
+                cursor: pointer;
                 height: 24px;
                 line-height: 24px;
                 margin: 4px 0;
+                &:hover{
+                    color: #0F9FB4;
+                    list-style: disc ;
+                }
             }
         }
     }

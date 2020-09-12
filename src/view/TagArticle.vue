@@ -1,13 +1,13 @@
 <template>
     <div class="home">
         <layout></layout>
-        <blogDetail :class="containerClass"></blogDetail>
+        <tagArticle :class="containerClass"></tagArticle>
     </div>
 </template>
 
 <script>
     import layout from '../components/layout'
-    import blogDetail from '../components/blog-detail'
+    import tagArticle from '../components/tag-article'
     import {mapState} from 'vuex'
     export default {
         name: "Home",
@@ -15,7 +15,7 @@
             ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
-            layout,blogDetail
+            layout,tagArticle
         },
         data(){
             return {
