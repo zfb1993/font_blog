@@ -47,5 +47,8 @@ body{
   .sider-bar{
     display: none;
   }
+  .show{
+    display: block;
+  }
 }
 </style>
