@@ -16,11 +16,10 @@
            </p>
            <div class="m-nav">
                <ul>
-                   <li>归档</li>
-                   <li>分类</li>
-                   <li>标签</li>
-                   <li>关于</li>
-                   <li>RSS</li>
+                   <li @click="jumpTo('archives')">归档</li>
+                   <li @click="jumpTo('categories')">分类</li>
+                   <li @click="jumpTo()">标签</li>
+                   <li @click="jumpTo()">关于</li>
                    <li class="m-sch">搜索</li>
                </ul>
 
@@ -37,6 +36,14 @@
               curHeight:0,
           }
         },
+        methods:{
+            jumpTo(to){
+                let url = to 
+                this.$router.push({
+                    name: url
+                });
+            }
+        }
     }
 </script>
 
@@ -85,6 +92,11 @@
                 margin: 4px 0;
             }
         }
+    }
+}
+@media print, screen and (max-width: 800px){
+    .sider-bar{
+        width: 250px;
     }
 }
 </style>

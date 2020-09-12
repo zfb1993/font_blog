@@ -3,6 +3,8 @@ import Home from '../view/Home'
 import About from '../view/About'
 import detail from '../view/detail'
 import archives from '../view/archives'
+import categories from '../view/categories'
+import categoryArticle from '../view/categoryArticle'
 
 export  default new VueRouter({
     routes:[
@@ -30,6 +32,16 @@ export  default new VueRouter({
             path:'/archives',
             name:"archives",
             component:archives
-        }
+        },
+        {
+            path:'/categories',
+            name:"categories",
+            component:categories
+        },
+        {
+            path:'/categoryArticle',
+            name:"categoryArticle",
+            component:categoryArticle
+        },
     ]
 })

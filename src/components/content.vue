@@ -32,13 +32,18 @@
                     </span>
                 </div>
             </div>
+            <page></page>
         </div>
     </div>
 </template>
 
 <script>
+    import page from './pages'
     export default {
         name: "content",
+        components:{
+            page
+        },
         data(){
             return {
                 lists:[

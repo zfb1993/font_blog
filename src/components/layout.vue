@@ -1,6 +1,6 @@
 <template>
     <div>
-        <blog-header @click="toggleClass()" ref="blogHeader"></blog-header>
+        <blogHeader @click="toggleClass()" ref="blogHeader"></blogHeader>
         <sideBar :class="sideBarClass"></sideBar>
     </div>
 </template>
