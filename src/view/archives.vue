@@ -1,12 +1,10 @@
 <template>
     <div class="home">
-        <layout></layout>
         <archivesDetail :class="containerClass"></archivesDetail>
     </div>
 </template>
 
 <script>
-    import layout from '../components/layout'
     import archivesDetail from '../components/archives-detail'
     import {mapState} from 'vuex'
     export default {
@@ -15,7 +13,7 @@
             ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
-            layout,archivesDetail
+            archivesDetail
         },
         data(){
             return {

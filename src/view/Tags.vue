@@ -1,12 +1,10 @@
 <template>
     <div class="home">
-        <layout></layout>
         <tag :class="containerClass"></tag>
     </div>
 </template>
 
 <script>
-    import layout from '../components/layout'
     import tag from '../components/tags'
     import {mapState} from 'vuex'
     export default {
@@ -15,7 +13,7 @@
             ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
-            layout,tag
+            tag
         },
         data(){
             return {

@@ -1,12 +1,10 @@
 <template>
     <div class="home">
-        <layout></layout>
         <categoriesDetail :class="containerClass"></categoriesDetail>
     </div>
 </template>
 
 <script>
-    import layout from '../components/layout'
     import categoriesDetail from '../components/categories-detail'
     import {mapState} from 'vuex'
     export default {
@@ -15,7 +13,7 @@
             ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
-            layout,categoriesDetail
+            categoriesDetail
         },
         data(){
             return {

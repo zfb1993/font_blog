@@ -2,6 +2,7 @@
     <div>
         <blogHeader @click="toggleClass()" ref="blogHeader"></blogHeader>
         <sideBar :class="sideBarClass"></sideBar>
+         <router-view></router-view>
     </div>
 </template>
 

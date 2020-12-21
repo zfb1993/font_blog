@@ -7,53 +7,61 @@ import Categories from '../view/Categories'
 import CategoryArticle from '../view/CategoryArticle'
 import Tags from '../view/Tags'
 import TagArticle from '../view/TagArticle'
+import Layout from '../components/layout'
 
 export  default new VueRouter({
     routes:[
         {
-            path:'*',
-            name:"Home",
-            component:Home
+            path: '/',
+            component: Layout,
+            children:[
+                {
+                    path:'/',
+                    name:"/",
+                    component:Home
+                },
+                {
+                    path:'Home',
+                    name:"Home",
+                    component:Home
+                },
+                {
+                    path:'About',
+                    name:"About",
+                    component:About
+                },
+                {
+                    path:'Detail',
+                    name:"Detail",
+                    component:Detail
+                },
+                {
+                    path:'Archives',
+                    name:"Archives",
+                    component:Archives
+                },
+                {
+                    path:'Categories',
+                    name:"Categories",
+                    component:Categories
+                },
+                {
+                    path:'CategoryArticle',
+                    name:"CategoryArticle",
+                    component:CategoryArticle
+                },
+                {
+                    path:'Tags',
+                    name:"Tags",
+                    component:Tags
+                },
+                {
+                    path:'TagArticle',
+                    name:"TagArticle",
+                    component:TagArticle
+                },
+            ]
         },
-        {
-            path:'/Home',
-            name:"Home",
-            component:Home
-        },
-        {
-            path:'/About',
-            name:"About",
-            component:About
-        },
-        {
-            path:'/Detail',
-            name:"Detail",
-            component:Detail
-        },
-        {
-            path:'/Archives',
-            name:"Archives",
-            component:Archives
-        },
-        {
-            path:'/Categories',
-            name:"Categories",
-            component:Categories
-        },
-        {
-            path:'/CategoryArticle',
-            name:"CategoryArticle",
-            component:CategoryArticle
-        },
-        {
-            path:'/Tags',
-            name:"Tags",
-            component:Tags
-        },
-        {
-            path:'/TagArticle',
-            name:"TagArticle",
-            component:TagArticle
-        },
+        
     ]
 })

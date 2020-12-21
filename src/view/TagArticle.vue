@@ -6,7 +6,6 @@
 </template>
 
 <script>
-    import layout from '../components/layout'
     import tagArticle from '../components/tag-article'
     import {mapState} from 'vuex'
     export default {
@@ -15,7 +14,7 @@
             ...mapState(['toggle','sideBarClass','containerClass'])
         },
         components:{
-            layout,tagArticle
+            tagArticle
         },
         data(){
             return {
