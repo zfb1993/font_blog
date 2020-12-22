@@ -10,12 +10,9 @@
 export default {
   name: 'App',
 
-  mounted() {
-    
+  mounted(){
+      this.$store.dispatch('AcInit');
   },
-  created(){
-            this.$store.dispatch('AcInit');
-        },
 }
 </script>
 

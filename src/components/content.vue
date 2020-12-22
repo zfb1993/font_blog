@@ -1,14 +1,13 @@
 <template>
     <div class="container">
         <div class="content">
-            <div class="item" v-for="(item,index) in lists" :key="index">
+            <div class="item" v-for="(item,index) in articles" :key="index">
                 <div class="item-content">
                         <div class="content-title">
-                                <a href="javascript:void(0)" @click="jumpTo(item)">python之给pdf添加页码</a>
+                                <a href="javascript:void(0)" @click="jumpTo(item)">{{item.title}}</a>
                         </div>
                         <div class="content-text">
-                            最近写release note, 总感觉用tex不太方便，特别是装texlive占用大量空间，还有各种依赖问题，想着能不能用markdown写更方便。
-                            实践证明，typora导出pdf的功能真的很棒，唯独一个不足之处就是生成的PDF不带页码。
+                            {{getIntroduct(item.article)}}
                         </div>
                         <p class="p-readmore" @click="jumpTo(item)">
                             <a href="javascript:void(0)">
@@ -19,16 +18,16 @@
                 <div class="p-info">
                     <span class="p-date">
                         <i class="fa fa-calendar"></i>
-                        <a href="javascript:void(0)">2020-08-13</a>
+                        <a href="javascript:void(0)">{{item.created_at}}</a>
                     </span>
-                    <span class="p-category">
+                    <!-- <span class="p-category">
                         <i class="fa fa-folder">
                         </i>
                         <a href="javascript:void(0)">Python</a>
-                    </span>
-                    <span class="p-tags">
+                    </span> -->
+                    <span class="p-tags" v-for="(tag,tagIndex) in item.tag_id " :key="tagIndex">
                         <i class="fa fa-tag"></i>
-                        <a href="javascript:void(0)">pdf</a>
+                        <a href="javascript:void(0)">{{getTag(tag)}}</a>
                     </span>
                 </div>
             </div>
@@ -48,13 +47,14 @@
             return {
                 lists:[
                     1,2,3,4,5,6
-                ]
+                ],
+                articles:[],
             }
         },
         methods:{
             getList(){
                 this.$api.getArticles().then(res=>{
-                    console.log(res)
+                    this.articles = res.data.data
                 })
             },
             jumpTo(item){
@@ -62,6 +62,19 @@
                     name: "detail"
                 });
                 console.log(item)
+            },
+            getTag(tag){
+                let tags = this.$store.state.Tags
+                let tagName = ''
+                tags.map(item=>{
+                    if (item.id == tag){
+                        tagName = item.name
+                    }
+                })
+                return tagName
+            },
+            getIntroduct(content){
+                return content.substr(0,60)
             }
         },
         mounted(){
