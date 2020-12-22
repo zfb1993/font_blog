@@ -40,7 +40,7 @@
 <script>
     import page from './pages'
     export default {
-        name: "content",
+        name: "contents",
         components:{
             page
         },
@@ -52,12 +52,20 @@
             }
         },
         methods:{
+            getList(){
+                this.$api.getArticles().then(res=>{
+                    console.log(res)
+                })
+            },
             jumpTo(item){
                 this.$router.push({
                     name: "detail"
                 });
                 console.log(item)
             }
+        },
+        mounted(){
+            this.getList()
         }
     }
 </script>

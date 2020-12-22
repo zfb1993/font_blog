@@ -11,8 +11,11 @@ export default {
   name: 'App',
 
   mounted() {
-    console.log(this.$route)
-  }
+    
+  },
+  created(){
+            this.$store.dispatch('AcInit');
+        },
 }
 </script>
 
