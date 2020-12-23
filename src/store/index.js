@@ -29,12 +29,12 @@ const store = new Vuex.Store({
     },
     actions: {
         AcInit({state}) {
-            if (state.Tags == []){
+            if (state.Tags.length == 0){
                 api.allTags().then(res=>{
                     state.Tags = res.data
                 })
             }
-            if (state.Categories  == []){
+            if (state.Categories.length == 0){
                 api.allCategories().then(res=>{
                     state.Categories = res.data
                 })

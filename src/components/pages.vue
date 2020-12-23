@@ -1,14 +1,18 @@
 <template>
     <div class="page" v-if="totalPage >= 1">
-        <a v-if="currentPage > 1" href="javascript:void(0)"> 上一页</a>
-        <a href="javascript:void(0)" v-if="firstShow">1</a>
-        <a class="pointer" v-if="beforeShow">…</a>
-        <a :class="item.class" href="javascript:void(0)" v-for="(item,index) in pageList" :key="index">
+        <a v-if="currentPage > 1" href="javascript:void(0)" @click="toPage(currentPage-1)"> 上一页</a>
+        <a href="javascript:void(0)" v-if="firstShow" @click="toPage(1)">1</a>
+        <a class="pointer" v-if="beforeShow" @click="toPage(current-3)">…</a>
+        <a :class="item.class" href="javascript:void(0)"
+           v-for="(item,index) in pageList"
+            :key="index"
+            @click="toPage(item.page)"
+        >
             {{item.page}}
         </a>
-        <a class="pointer" v-if="afterShow">…</a>
-        <a href="javascript:void(0)"  v-if="lastShow">{{totalPage}}</a>
-        <a v-if="currentPage < totalPage" href="javascript:void(0)">下一页</a>
+        <a class="pointer" v-if="afterShow" @click="toPage(current+3)">…</a>
+        <a href="javascript:void(0)"  v-if="lastShow" @click="toPage(totalPage)">{{totalPage}}</a>
+        <a v-if="currentPage < totalPage" href="javascript:void(0)" @click="toPage(currentPage+1)">下一页</a>
     </div>
 </template>
 
@@ -38,39 +42,37 @@ export default {
         }
     },
     methods:{
-        getPages(value){
-            let begin = value.currentPage -2
-            let end = value.currentPage + 2
+        getPages(){
+            let begin = this.currentPage -2
+            let end = this.currentPage + 2
             let obj = null
             let pageList = []
-            
             if(begin <=  1){
                 this.firstShow = false
             }else{
                 this.firstShow = true
             }
-
-            if(begin <=  2 || value.totalPage == 1){
+            
+            if(begin <=  2 || this.totalPage == 1){
                 this.beforeShow = false
             }else{
                 this.beforeShow = true
             }
 
-            if(end >= value.totalPage-1 || value.totalPage == 1 ){
+            if(end >= this.totalPage-1 || this.totalPage == 1 ){
                 this.afterShow = false
             }else{
                 this.afterShow = true
             }
-            if(end >= value.totalPage){
+            if(end >= this.totalPage){
                 this.lastShow = false
             }else{
                 this.lastShow = true
             }
 
             for (begin;begin <= end; begin++){
-                console.log(begin,value)
-                if(begin > 0 && begin <= value.totalPage ){
-                    if(begin == value.currentPage){
+                if(begin > 0 && begin <= this.totalPage ){
+                    if(begin == this.currentPage){
                         obj = {page:begin,class:'current pointer'}
                     }else{
                         obj = {page:begin,class:''}
@@ -79,11 +81,15 @@ export default {
                 }
             }
             return pageList
+        },
+        toPage(page){
+            console.log(page,11111111111111111)
+            this.$emit("page-change", page);
         }
     },
     computed:{
         pageList(){
-            return this.getPages({pageSize:this.pageSize,currentPage:this.currentPage,totalPage:this.totalPage})
+            return this.getPages()
         }
     },
     mounted:function(){

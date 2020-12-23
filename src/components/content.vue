@@ -34,7 +34,8 @@
             <page 
                 :pageSize="pageConfig.pageSize" 
                 :currentPage="pageConfig.currentPage" 
-                :totalPage="pageConfig.totalPage" 
+                :totalPage="pageConfig.totalPage"
+                @page-change="pageChange"
             ></page>
         </div>
     </div>
@@ -52,15 +53,13 @@
             return {
                 articles:[],
                 pageConfig:{
-                    pageSize: 10,     //一页的数据条数
-                    currentPage: 1,   //当前页的索引
-                    totalPage: 1,     //总的页数
+                    
                 }
             }
         },
         methods:{
-            getList(){
-                this.$api.getArticles().then(res=>{
+            getList(page){
+                this.$api.getArticles({page:page}).then(res=>{
                     this.articles = res.data.data
                     this.pageConfig.currentPage = res.data.current_page
                     this.pageConfig.totalPage = res.data.last_page
@@ -84,10 +83,13 @@
             },
             getIntroduct(content){
                 return content.substr(0,200)
+            },
+            pageChange(page){
+                this.getList(page);
             }
         },
         mounted(){
-            this.getList()
+            this.getList(1)
         }
     }
 </script>
