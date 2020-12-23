@@ -39,25 +39,37 @@ export default {
     },
     methods:{
         getPages(value){
-            let begin = value.currentPage -3
-            let end = value.currentPage + 3 
+            let begin = value.currentPage -2
+            let end = value.currentPage + 2
             let obj = null
             let pageList = []
+            
+            if(begin <=  1){
+                this.firstShow = false
+            }else{
+                this.firstShow = true
+            }
+
+            if(begin <=  2 || value.totalPage == 1){
+                this.beforeShow = false
+            }else{
+                this.beforeShow = true
+            }
+
+            if(end >= value.totalPage-1 || value.totalPage == 1 ){
+                this.afterShow = false
+            }else{
+                this.afterShow = true
+            }
+            if(end >= value.totalPage){
+                this.lastShow = false
+            }else{
+                this.lastShow = true
+            }
+
             for (begin;begin <= end; begin++){
-                console.log(end,11111111111111)
-                if(begin > 0 && begin <= value.totalPage){
-                    if(begin ==  1){
-                        this.firstShow = false
-                    }
-                    if(begin ==  2 || value.totalPage == 1){
-                        this.beforeShow = false
-                    }
-                    if(begin == value.totalPage-1 || value.totalPage == 1 ){
-                        this.afterShow = false
-                    }
-                    if(begin == value.totalPage){
-                        this.lastShow = false
-                    }
+                console.log(begin,value)
+                if(begin > 0 && begin <= value.totalPage ){
                     if(begin == value.currentPage){
                         obj = {page:begin,class:'current pointer'}
                     }else{

@@ -53,8 +53,8 @@
                 articles:[],
                 pageConfig:{
                     pageSize: 10,     //一页的数据条数
-                    currentPage: 1,        //当前页的索引
-                    totalPage: 1      //总的页数
+                    currentPage: 1,   //当前页的索引
+                    totalPage: 1,     //总的页数
                 }
             }
         },
@@ -62,8 +62,8 @@
             getList(){
                 this.$api.getArticles().then(res=>{
                     this.articles = res.data.data
-                    this.pageConfig.currentPage = 9
-                    this.pageConfig.totalPage = 18
+                    this.pageConfig.currentPage = res.data.current_page
+                    this.pageConfig.totalPage = res.data.last_page
                     this.pageConfig.pageSize = res.data.per_page
                 })
             },
