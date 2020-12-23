@@ -1,47 +1,52 @@
 <template>
     <div class="archive">
         <section class="content">
-            <h1>Linux</h1>
-            <div class="lists">
-                <h2>2020</h2>
+            <h1>{{getTag()}}</h1>
+            <div class="lists" v-for="(item,index) in lists" :key="index">
+                <h2>{{index}}</h2>
                 <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                </ul>
-            </div>
-            <div class="lists">
-                <h2>2020</h2>
-                <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                </ul>
-            </div>
-            <div class="lists">
-                <h2>2020</h2>
-                <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
+                    <li v-for="(article,aIndex) in item" :key="aIndex">
+                        {{article.date}} 
+                        <a href="javascript:void(0)">
+                            {{article.title}}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </section>
-        <page></page>
     </div>
 </template>
 
 <script>
-import page from './pages'
 
 export default {
     name: "category-article",
-    components:{
-        page
+    data(){
+        return {
+            lists:[]
+        }
     },
+    methods:{
+        getList(){
+            let tagId = this.$route.query.id
+            this.$api.archives({tag_id:tagId}).then(res=>{
+                this.lists = res.data
+            })
+        },
+        getTag(){
+            let tags = this.$store.state.Tags
+            let tagName = ''
+            tags.map(item=>{
+                if (item.id == this.$route.query.id){
+                    tagName = item.name
+                }
+            })
+            return tagName
+        },
+    },
+    mounted(){
+        this.getList()
+    }
 }
 </script>
 

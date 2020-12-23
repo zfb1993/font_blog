@@ -64,6 +64,7 @@
                     this.pageConfig.currentPage = res.data.current_page
                     this.pageConfig.totalPage = res.data.last_page
                     this.pageConfig.pageSize = res.data.per_page
+                    this.$store.commit('SetArticleList',res.data)
                 })
             },
             jumpTo(item){
@@ -89,7 +90,15 @@
             }
         },
         mounted(){
-            this.getList(1)
+            if(this.$store.state.ArticleList){
+                let data = this.$store.state.ArticleList
+                this.articles = data.data
+                this.pageConfig.currentPage = data.current_page
+                this.pageConfig.totalPage = data.last_page
+                this.pageConfig.pageSize = data.per_page
+            }else{
+                this.getList(1)
+            }
         }
     }
 </script>

@@ -83,7 +83,6 @@ export default {
             return pageList
         },
         toPage(page){
-            console.log(page,11111111111111111)
             this.$emit("page-change", page);
         }
     },

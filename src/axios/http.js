@@ -14,11 +14,15 @@ const api = {
     },
 
     getCategories(data){
-        return post('/categoreis',data)
+        return post('/categories',data)
     },
     allCategories(data){
         return post('/allCategories',data)
     },
+
+    archives(data){
+        return post('/archives',data)
+    }
 }
 
 

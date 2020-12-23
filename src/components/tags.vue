@@ -5,50 +5,8 @@
                 Tags
             </h1>
             <ul>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">网络保安</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">在线上早班</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">键盘侠</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">网络保安</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">在线上早班</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">键盘侠</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">网络保安</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">在线上早班</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">键盘侠</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">网络保安</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">在线上早班</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">键盘侠</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">网络保安</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">在线上早班</a>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">键盘侠</a>
+                <li class="category-list-item" v-for="(item,index) in tags" :key="index">
+                    <a class="category-list-link" href="javascript:void(0)" @click="toPage(item.id)">{{item.name}}</a>
                 </li>
             </ul>
         </section>
@@ -56,8 +14,19 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
-    name:'tags'
+    name:'tags',
+    methods:{
+        toPage(tagId){
+            this.$router.push({
+                path: "TagArticles?id="+tagId
+            });
+        }
+    },
+    computed:{
+        ...mapState({tags:'Tags'}),
+    }
 }
 </script>
 

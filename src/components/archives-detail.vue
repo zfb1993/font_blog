@@ -2,43 +2,40 @@
     <div class="archive">
         <section class="content">
             <h1>Archives</h1>
-            <div class="lists">
-                <h2>2020</h2>
+            <div class="lists" v-for="(item,index) in list" :key="index">
+                <h2>{{index}}</h2>
                 <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                </ul>
-            </div>
-            <div class="lists">
-                <h2>2020</h2>
-                <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                </ul>
-            </div>
-            <div class="lists">
-                <h2>2020</h2>
-                <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
+                    <li v-for="(article,aIndex) in item" :key="aIndex">
+                        {{article.date}} 
+                        <a href="javascript:void(0)">
+                            {{article.title}}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </section>
-        <pages></pages>
     </div>
 </template>
 
 <script>
-import pages from './pages'
 export default {
-    components:{
-        pages
+    name:'archives',
+    data(){
+        return {
+            list:[]
+        }
+    },
+    methods:{
+        getList(){
+            this.$api.archives().then(res=>{
+                if(res.status == 200){
+                    this.list = res.data
+                }
+            })
+        }
+    },
+    mounted(){
+        this.getList()
     }
 }
 </script>

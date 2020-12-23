@@ -5,17 +5,14 @@
                 Categories
             </h1>
             <ul>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">网络保安</a>
-                    <span>13</span>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">在线上早班</a>
-                    <span>13</span>
-                </li>
-                <li class="category-list-item">
-                    <a class="category-list-link" href="javascript:void(0)">键盘侠</a>
-                    <span>13</span>
+                <li class="category-list-item" v-for="(item,index) in categoryList" :key="index">
+                    <a class="category-list-link"
+                       href="javascript:void(0)"
+                        @click="toPage(item.category_id)"
+                    >
+                        {{getCategory(item.category_id)}}
+                    </a>
+                    <span>{{item.count}}</span>
                 </li>
             </ul>
             
@@ -25,7 +22,39 @@
 
 <script>
 export default {
-    name:'categories-detail'
+    name:'categories-detail',
+    data(){
+        return {
+            categoryList:[]
+        }
+    },
+    methods:{
+        getList(){
+            this.$api.getCategories().then(res=>{
+                if(res.status == 200){
+                    this.categoryList = res.data
+                }
+            })
+        },
+        getCategory(category){
+            let categories = this.$store.state.Categories
+            let categoryName = ''
+            categories.map(item=>{
+                if (item.id == category){
+                    categoryName = item.name
+                }
+            })
+            return categoryName
+        },
+        toPage(category_id){
+            this.$router.push({
+                path: "CategoryArticles?id="+category_id
+            });
+        }
+    },
+    mounted(){
+        this.getList()      
+    }
 }
 </script>
 

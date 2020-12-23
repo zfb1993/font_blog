@@ -1,47 +1,52 @@
 <template>
     <div class="archive">
         <section class="content">
-            <h1>Linux</h1>
-            <div class="lists">
-                <h2>2020</h2>
+            <h1>{{getCategory()}}</h1>
+            <div class="lists" v-for="(item,index) in lists" :key="index">
+                <h2>{{index}}</h2>
                 <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                </ul>
-            </div>
-            <div class="lists">
-                <h2>2020</h2>
-                <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                </ul>
-            </div>
-            <div class="lists">
-                <h2>2020</h2>
-                <ul>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
-                    <li>08/13 <a href="javascript:void(0)">python之给pdf添加页码</a></li>
+                    <li v-for="(article,aIndex) in item" :key="aIndex">
+                        {{article.date}} 
+                        <a href="javascript:void(0)">
+                            {{article.title}}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </section>
-        <page></page>
     </div>
 </template>
 
 <script>
-import page from './pages'
 
 export default {
     name: "category-article",
-    components:{
-        page
+    data(){
+        return {
+            lists:[]
+        }
     },
+    methods:{
+        getList(){
+            let categoryId = this.$route.query.id
+            this.$api.archives({category_id:categoryId}).then(res=>{
+                this.lists = res.data
+            })
+        },
+        getCategory(){
+            let categories = this.$store.state.Categories
+            let categoryName = ''
+            categories.map(item=>{
+                if (item.id == this.$route.query.id){
+                    categoryName = item.name
+                }
+            })
+            return categoryName
+        },
+    },
+    mounted(){
+        this.getList()
+    }
 }
 </script>
 

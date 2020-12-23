@@ -8,7 +8,9 @@ import CategoryArticle from '../view/CategoryArticle'
 import Tags from '../view/Tags'
 import TagArticle from '../view/TagArticle'
 import Layout from '../components/layout'
-
+import CategoryArticles from '../components/category-article'
+import TagArticles from '../components/tag-article'
+ 
 export  default new VueRouter({
     routes:[
         {
@@ -51,6 +53,11 @@ export  default new VueRouter({
                     component:CategoryArticle
                 },
                 {
+                    path:'CategoryArticles',
+                    name:"CategoryArticles",
+                    component:CategoryArticles
+                },
+                {
                     path:'Tags',
                     name:"Tags",
                     component:Tags
@@ -59,6 +66,11 @@ export  default new VueRouter({
                     path:'TagArticle',
                     name:"TagArticle",
                     component:TagArticle
+                },
+                {
+                    path:'TagArticles',
+                    name:"TagArticles",
+                    component:TagArticles
                 },
             ]
         },
