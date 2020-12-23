@@ -3,26 +3,20 @@
         <div class="content">
             <div class="item-content">
                         <div class="content-title">
-                                <a href="javascript:void(0)" @click="jumpTo(item)">python之给pdf添加页码</a>
+                                <a href="javascript:void(0)" >{{article.title}}</a>
                         </div>
                         <div class="p-info">
                             <span class="p-date">
                                 <i class="fa fa-calendar"></i>
-                                <a href="javascript:void(0)">2020-08-13</a>
+                                <a href="javascript:void(0)">{{article.created_at}}</a>
                             </span>
-                            <span class="p-category">
-                                <i class="fa fa-folder">
-                                </i>
-                                <a href="javascript:void(0)">Python</a>
-                            </span>
-                            <span class="p-tags">
+                            <span class="p-tags" v-for="(tag,tagIndex) in article.tag_id " :key="tagIndex">
                                 <i class="fa fa-tag"></i>
-                                <a href="javascript:void(0)">pdf</a>
+                                <a href="javascript:void(0)">{{getTag(tag)}}</a>
                             </span>
                         </div>
-                        <div class="content-text">
-                            最近写release note, 总感觉用tex不太方便，特别是装texlive占用大量空间，还有各种依赖问题，想着能不能用markdown写更方便。
-                            实践证明，typora导出pdf的功能真的很棒，唯独一个不足之处就是生成的PDF不带页码。
+                        <div class="content-text1">
+                             <VueMarkdown :source="article.article"></VueMarkdown>
                         </div>
                 </div>
         </div>
@@ -30,8 +24,53 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import VueMarkdown from 'vue-markdown'
+
 export default {
-    name:'blog-detail'
+    name:'blog-detail',
+    components:{VueMarkdown},
+    data(){
+        return {
+            article: {
+                title: '',
+                article: '',
+                created_at: '',
+                tag_id: []
+            }
+        }
+    },
+    computed:{
+        ...mapState({list:'ArticleList'})
+    },
+    methods: {
+        filterAppInfoFromAppList(){
+            console.log(this.list)
+            if(!this.list.data){
+                this.$router.push('/');
+            }
+            let find = this.list.data.find(d=>d.id==this.$route.query.id);
+            if(!find){
+                // this.$router.push('/');
+            }else{
+                this.article = find
+            }
+            console.log(this.article)
+        },
+        getTag(tag){
+            let tags = this.$store.state.Tags
+            let tagName = ''
+            tags.map(item=>{
+                if (item.id == tag){
+                    tagName = item.name
+                }
+            })
+            return tagName
+        },
+    },
+    mounted(){
+        this.filterAppInfoFromAppList()
+    }
 }
 </script>
 
@@ -64,7 +103,7 @@ export default {
                     cursor: pointer;
                     color: #0F9FB4;
                 }
-                .content-text{
+                .content-text1{
                         padding-left: 20px;
                         font-size: 15px;
                         margin: 1.5em 0;

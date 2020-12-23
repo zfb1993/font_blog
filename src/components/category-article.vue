@@ -7,7 +7,7 @@
                 <ul>
                     <li v-for="(article,aIndex) in item" :key="aIndex">
                         {{article.date}} 
-                        <a href="javascript:void(0)">
+                        <a href="javascript:void(0)" @click="jumpTo(article)">
                             {{article.title}}
                         </a>
                     </li>
@@ -42,6 +42,11 @@ export default {
                 }
             })
             return categoryName
+        },
+        jumpTo(item){
+            this.$router.push({
+                path: "detail?id="+item.id
+            });
         },
     },
     mounted(){

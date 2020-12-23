@@ -39,6 +39,11 @@ const store = new Vuex.Store({
                     state.Categories = res.data
                 })
             }
+            if(!state.ArticleList){
+                api.getArticles().then(res=>{
+                    state.ArticleList = res.data
+                })
+            }
         }
     },
 })

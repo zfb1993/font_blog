@@ -7,7 +7,8 @@
                 <ul>
                     <li v-for="(article,aIndex) in item" :key="aIndex">
                         {{article.date}} 
-                        <a href="javascript:void(0)">
+                        <a href="javascript:void(0)" 
+                        >
                             {{article.title}}
                         </a>
                     </li>
@@ -32,7 +33,12 @@ export default {
                     this.list = res.data
                 }
             })
-        }
+        },
+        jumpTo(item){
+            this.$router.push({
+                path: "detail?id="+item.id
+            });
+        },
     },
     mounted(){
         this.getList()
