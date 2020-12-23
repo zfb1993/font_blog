@@ -7,7 +7,7 @@
                                 <a href="javascript:void(0)" @click="jumpTo(item)">{{item.title}}</a>
                         </div>
                         <div class="content-text">
-                            {{getIntroduct(item.article)}}
+                            <VueMarkdown :source="getIntroduct(item.article)"></VueMarkdown>
                         </div>
                         <p class="p-readmore" @click="jumpTo(item)">
                             <a href="javascript:void(0)">
@@ -31,37 +31,46 @@
                     </span>
                 </div>
             </div>
-            <page></page>
+            <page 
+                :pageSize="pageConfig.pageSize" 
+                :currentPage="pageConfig.currentPage" 
+                :totalPage="pageConfig.totalPage" 
+            ></page>
         </div>
     </div>
 </template>
 
 <script>
+    import VueMarkdown from 'vue-markdown'
     import page from './pages'
     export default {
         name: "contents",
         components:{
-            page
+            page,VueMarkdown
         },
         data(){
             return {
-                lists:[
-                    1,2,3,4,5,6
-                ],
                 articles:[],
+                pageConfig:{
+                    pageSize: 10,     //一页的数据条数
+                    currentPage: 1,        //当前页的索引
+                    totalPage: 1      //总的页数
+                }
             }
         },
         methods:{
             getList(){
                 this.$api.getArticles().then(res=>{
                     this.articles = res.data.data
+                    this.pageConfig.currentPage = 9
+                    this.pageConfig.totalPage = 18
+                    this.pageConfig.pageSize = res.data.per_page
                 })
             },
             jumpTo(item){
                 this.$router.push({
-                    name: "detail"
+                    path: "detail?id="+item.id
                 });
-                console.log(item)
             },
             getTag(tag){
                 let tags = this.$store.state.Tags
@@ -74,7 +83,7 @@
                 return tagName
             },
             getIntroduct(content){
-                return content.substr(0,60)
+                return content.substr(0,200)
             }
         },
         mounted(){
@@ -83,6 +92,13 @@
     }
 </script>
 
+<style lang="scss">
+    .content-text{
+            img{
+                width: 100px !important;
+            }
+    }
+</style>
 <style lang="scss" scoped>
 .container{
     width: 100%;
@@ -116,6 +132,9 @@
                 .content-text{
                         font-size: 15px;
                         margin: 1.5em 0;
+                        img{
+                            width: 100px !important;
+                        }
                 }
                 .p-readmore{
                     text-align: right;

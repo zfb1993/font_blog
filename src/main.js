@@ -6,9 +6,11 @@ import Vuex from 'vuex'
 import store from './store/index'
 import axios from 'axios'
 import api from './axios/http'
+import VueMarkdown from 'vue-markdown'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
+Vue.use(VueMarkdown)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.prototype.$api = api

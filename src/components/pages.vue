@@ -1,68 +1,80 @@
 <template>
-    <div class="page" v-if="pageConfig.totalPage >= 1">
-        <a v-if="pageConfig.currentPage > 1" href="javascript:void(0)"> 上一页</a>
+    <div class="page" v-if="totalPage >= 1">
+        <a v-if="currentPage > 1" href="javascript:void(0)"> 上一页</a>
         <a href="javascript:void(0)" v-if="firstShow">1</a>
         <a class="pointer" v-if="beforeShow">…</a>
         <a :class="item.class" href="javascript:void(0)" v-for="(item,index) in pageList" :key="index">
             {{item.page}}
         </a>
         <a class="pointer" v-if="afterShow">…</a>
-        <a href="javascript:void(0)"  v-if="lastShow">{{pageConfig.totalPage}}</a>
-        <a v-if="pageConfig.currentPage < pageConfig.totalPage" href="javascript:void(0)">下一页</a>
+        <a href="javascript:void(0)"  v-if="lastShow">{{totalPage}}</a>
+        <a v-if="currentPage < totalPage" href="javascript:void(0)">下一页</a>
     </div>
 </template>
 
 <script>
 export default {
     props:{
-        pageConfig:{
-            type: Object,
-            default: function(){
-                return {
-                    pageSize: 10,     //一页的数据条数
-                    currentPage: 1,        //当前页的索引
-                    totalPage: 1      //总的页数
-                }
-            }
-        }
+        pageSize:{
+            type: Number,
+            default: 10,
+        },
+        currentPage:{
+            type: Number,
+            default: 1,
+        },
+        totalPage:{
+            type: Number,
+            default: 1,
+        },
     },
     name:'page',
     data(){
         return {
-            pageList:[],
             beforeShow: true,
             afterShow: true,
             firstShow: true,
             lastShow: true,
         }
     },
-    mounted:function(){
-            let begin = this.pageConfig.currentPage -2
-            let end = this.pageConfig.currentPage + 2 
+    methods:{
+        getPages(value){
+            let begin = value.currentPage -3
+            let end = value.currentPage + 3 
             let obj = null
+            let pageList = []
             for (begin;begin <= end; begin++){
-                if(begin > 0 && begin <= this.pageConfig.totalPage){
+                console.log(end,11111111111111)
+                if(begin > 0 && begin <= value.totalPage){
                     if(begin ==  1){
                         this.firstShow = false
                     }
-                    if(begin ==  2 || this.pageConfig.totalPage == 1){
+                    if(begin ==  2 || value.totalPage == 1){
                         this.beforeShow = false
                     }
-                    if(begin == this.pageConfig.totalPage-1 || this.pageConfig.totalPage == 1 ){
+                    if(begin == value.totalPage-1 || value.totalPage == 1 ){
                         this.afterShow = false
                     }
-                    if(begin == this.pageConfig.totalPage){
+                    if(begin == value.totalPage){
                         this.lastShow = false
                     }
-                    if(begin == this.pageConfig.currentPage){
+                    if(begin == value.currentPage){
                         obj = {page:begin,class:'current pointer'}
                     }else{
                         obj = {page:begin,class:''}
                     }
-                    this.pageList.push(obj)
+                    pageList.push(obj)
                 }
             }
-            console.log(this.pageList)
+            return pageList
+        }
+    },
+    computed:{
+        pageList(){
+            return this.getPages({pageSize:this.pageSize,currentPage:this.currentPage,totalPage:this.totalPage})
+        }
+    },
+    mounted:function(){
     }
 }
 </script>

@@ -8,8 +8,8 @@ const store = new Vuex.Store({
         toggle:false,
         sideBarClass:'',
         containerClass:'',
-        Tags:null,
-        Categories:null,
+        Tags:[],
+        Categories:[],
         ArticleList:null,
     },
     mutations:{
@@ -29,12 +29,12 @@ const store = new Vuex.Store({
     },
     actions: {
         AcInit({state}) {
-            if (!state.Tags){
+            if (state.Tags == []){
                 api.allTags().then(res=>{
                     state.Tags = res.data
                 })
             }
-            if (!state.Categories){
+            if (state.Categories  == []){
                 api.allCategories().then(res=>{
                     state.Categories = res.data
                 })
