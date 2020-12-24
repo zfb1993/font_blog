@@ -30,9 +30,12 @@ export default {
     },
     methods:{
         getList(){
+            this.$myLoading.open()
             this.$api.getCategories().then(res=>{
                 if(res.status == 200){
                     this.categoryList = res.data
+                    this.$store.commit('SetCategoryCount',res.data)
+                    this.$myLoading.hide()
                 }
             })
         },
@@ -53,7 +56,11 @@ export default {
         }
     },
     mounted(){
-        this.getList()      
+        if(this.$store.state.CategoryCount){
+            this.categoryList = this.$store.state.CategoryCount
+        }else{
+            this.getList()      
+        }
     }
 }
 </script>

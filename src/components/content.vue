@@ -59,17 +59,20 @@
         },
         methods:{
             getList(page){
+                this.$myLoading.open()
                 this.$api.getArticles({page:page}).then(res=>{
                     this.articles = res.data.data
                     this.pageConfig.currentPage = res.data.current_page
                     this.pageConfig.totalPage = res.data.last_page
                     this.pageConfig.pageSize = res.data.per_page
                     this.$store.commit('SetArticleList',res.data)
+                    this.$myLoading.hide()
                 })
             },
             jumpTo(item){
+                this.$store.commit('SetArticleDetail',item)
                 this.$router.push({
-                    path: "detail?id="+item.id
+                    path: "detail"
                 });
             },
             getTag(tag){

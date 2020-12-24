@@ -31,8 +31,10 @@ export default {
     methods:{
         getList(){
             let tagId = this.$route.query.id
+            this.$myLoading.open()
             this.$api.archives({tag_id:tagId}).then(res=>{
                 this.lists = res.data
+                this.$myLoading.hide()
             })
         },
         getTag(){
@@ -46,8 +48,9 @@ export default {
             return tagName
         },
         jumpTo(item){
+            this.$store.commit('SetArticleDetail',item)
             this.$router.push({
-                path: "detail?id="+item.id
+                path: "detail"
             });
         },
     },

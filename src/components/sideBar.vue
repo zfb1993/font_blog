@@ -2,7 +2,7 @@
     <div class="sider-bar" >
        <nav class="h-head">
            <div class="h-hdimg">
-               <a href="">
+               <a href="javascript:void(0)" @click="jumpTo('/')">
                    <img class="avatar" src="../assets/img/avatar.jpg" alt="" width="128" height="128">
                </a>
                <h3 class="author">

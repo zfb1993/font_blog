@@ -44,19 +44,6 @@ export default {
         ...mapState({list:'ArticleList'})
     },
     methods: {
-        filterAppInfoFromAppList(){
-            console.log(this.list)
-            if(!this.list.data){
-                this.$router.push('/');
-            }
-            let find = this.list.data.find(d=>d.id==this.$route.query.id);
-            if(!find){
-                // this.$router.push('/');
-            }else{
-                this.article = find
-            }
-            console.log(this.article)
-        },
         getTag(tag){
             let tags = this.$store.state.Tags
             let tagName = ''
@@ -69,7 +56,8 @@ export default {
         },
     },
     mounted(){
-        this.filterAppInfoFromAppList()
+        this.article = this.$store.state.ArticleDetail
+        console.log(this.article)
     }
 }
 </script>

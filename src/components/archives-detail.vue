@@ -7,8 +7,7 @@
                 <ul>
                     <li v-for="(article,aIndex) in item" :key="aIndex">
                         {{article.date}} 
-                        <a href="javascript:void(0)" 
-                        >
+                        <a href="javascript:void(0)" @click="jumpTo(article)">
                             {{article.title}}
                         </a>
                     </li>
@@ -28,20 +27,28 @@ export default {
     },
     methods:{
         getList(){
+            this.$myLoading.open()
             this.$api.archives().then(res=>{
                 if(res.status == 200){
                     this.list = res.data
+                    this.$store.commit('SetArchives',res.data)
+                    this.$myLoading.hide()
                 }
             })
         },
         jumpTo(item){
+            this.$store.commit('SetArticleDetail',item)
             this.$router.push({
-                path: "detail?id="+item.id
+                path: "detail"
             });
-        },
+        }
     },
     mounted(){
-        this.getList()
+        if(this.$store.state.Archives){
+            this.list = this.$store.state.Archives
+        }else{
+            this.getList()
+        }
     }
 }
 </script>

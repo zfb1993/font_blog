@@ -29,8 +29,10 @@ export default {
     methods:{
         getList(){
             let categoryId = this.$route.query.id
+            this.$myLoading.open()
             this.$api.archives({category_id:categoryId}).then(res=>{
                 this.lists = res.data
+                this.$myLoading.hide()
             })
         },
         getCategory(){
@@ -44,8 +46,9 @@ export default {
             return categoryName
         },
         jumpTo(item){
+            this.$store.commit('SetArticleDetail',item)
             this.$router.push({
-                path: "detail?id="+item.id
+                path: "detail"
             });
         },
     },
