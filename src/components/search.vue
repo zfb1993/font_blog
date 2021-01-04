@@ -1,6 +1,11 @@
 <template>
     <div class="container">
         <div class="content">
+            <section>
+                <h1>
+                    搜索
+                </h1>
+            </section>
             <div class="item" v-for="(item,index) in articles" :key="index">
                 <div class="item-content">
                         <div class="content-title">
@@ -31,23 +36,16 @@
                     </span>
                 </div>
             </div>
-            <page 
-                :pageSize="pageConfig.pageSize" 
-                :currentPage="pageConfig.currentPage" 
-                :totalPage="pageConfig.totalPage"
-                @page-change="pageChange"
-            ></page>
         </div>
     </div>
 </template>
 
 <script>
     import VueMarkdown from 'vue-markdown'
-    import page from './pages'
     export default {
         name: "contents",
         components:{
-            page,VueMarkdown
+            VueMarkdown
         },
         data(){
             return {
@@ -58,17 +56,6 @@
             }
         },
         methods:{
-            getList(page){
-                this.$myLoading.open()
-                this.$api.getArticles({page:page}).then(res=>{
-                    this.articles = res.data.data
-                    this.pageConfig.currentPage = res.data.current_page
-                    this.pageConfig.totalPage = res.data.last_page
-                    this.pageConfig.pageSize = res.data.per_page
-                    this.$store.commit('SetArticleList',res.data)
-                    this.$myLoading.hide()
-                })
-            },
             jumpTo(item){
                 this.$store.commit('SetArticleDetail',item)
                 this.$router.push({
@@ -93,15 +80,8 @@
             }
         },
         mounted(){
-            if(this.$store.state.ArticleList){
-                let data = this.$store.state.ArticleList
-                this.articles = data.data
-                this.pageConfig.currentPage = data.current_page
-                this.pageConfig.totalPage = data.last_page
-                this.pageConfig.pageSize = data.per_page
-            }else{
-                this.getList(1)
-            }
+            console.log(this.$store.state.SearchData)
+            this.articles = this.$store.state.SearchData
         }
     }
 </script>
@@ -131,6 +111,17 @@
         padding-left: 320px;
         background-clip: content-box;
         background-color: #2d4356;
+        section{
+            width:60%;
+            text-align: left;
+            padding-left: 40px;
+            margin-bottom: 20px;
+            h1{
+                margin-top: 20px;
+                text-align: left;
+                font-size: 30px;
+            }
+        }
         .item{
             width: 100%;
             .item-content{

@@ -66,4 +66,10 @@ body{
     display: block;
   }
 }
+button, textarea, input, select {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
+  font-size: 12px;
+  outline: 0;
+}
+
 </style>

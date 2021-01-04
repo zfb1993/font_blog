@@ -10,6 +10,7 @@ import TagArticle from '../view/TagArticle'
 import Layout from '../components/layout'
 import CategoryArticles from '../components/category-article'
 import TagArticles from '../components/tag-article'
+import Search from '../view/Search'
  
 export  default new VueRouter({
     routes:[
@@ -71,6 +72,11 @@ export  default new VueRouter({
                     path:'TagArticles',
                     name:"TagArticles",
                     component:TagArticles
+                },
+                {
+                    path:'Search',
+                    name:"Search",
+                    component:Search
                 },
             ]
         },

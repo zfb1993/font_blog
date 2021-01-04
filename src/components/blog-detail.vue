@@ -16,7 +16,7 @@
                             </span>
                         </div>
                         <div class="content-text1">
-                             <VueMarkdown :source="article.article"></VueMarkdown>
+                             <VueMarkdown :source="article.article" class="markdown-class"></VueMarkdown>
                         </div>
                 </div>
         </div>

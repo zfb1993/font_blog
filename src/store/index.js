@@ -14,6 +14,7 @@ const store = new Vuex.Store({
         ArticleDetail:null,
         Archives:null,
         CategoryCount:null,
+        SearchData:null
     },
     mutations:{
         changeToggle(state){
@@ -37,6 +38,9 @@ const store = new Vuex.Store({
         },
         SetCategoryCount(state,count){
             state.CategoryCount = count
+        },
+        SetSearchData(state,data){
+            state.SearchData = data
         }
     },
     actions: {

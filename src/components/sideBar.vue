@@ -20,7 +20,15 @@
                    <li @click="jumpTo('Categories')">分类</li>
                    <li @click="jumpTo('Tags')">标签</li>
                    <li @click="jumpTo('About')">关于</li>
-                   <li class="m-sch">搜索</li>
+                   <li class="m-sch">
+                       <input class="txt" type="text"
+                        id="local-search-input"
+                        v-on:keyup.enter="submit"
+                        v-model="search"
+                        name="q" value="搜索"
+                        onfocus="if(this.value=='搜索'){this.value='';}"
+                        onblur="if(this.value==''){this.value='搜索';}">
+                   </li>
                </ul>
 
            </div>
@@ -34,6 +42,7 @@
         data(){
           return {
               curHeight:0,
+              search: ''
           }
         },
         methods:{
@@ -42,6 +51,14 @@
                 this.$router.push({
                     name: url
                 });
+            },
+            submit(){
+                this.$api.getArticles({keyword:this.search}).then(res=>{
+                    this.$store.commit('SetSearchData',res.data)
+                    this.$router.push({
+                        path:'search'
+                    })
+                })
             }
         }
     }
@@ -95,6 +112,19 @@
                     color: #0F9FB4;
                     list-style: disc ;
                 }
+                input{
+                    border: none;
+                }
+            }
+            
+            .m-sch .txt {
+                width: 140px;
+                height: 20px;
+                line-height: 20px;
+                padding: 0 0 4px;
+                border: 1px solid #0F9FB4;
+                border-width: 0 0 1px;
+                background: 0;
             }
         }
     }
