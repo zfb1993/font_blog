@@ -15,7 +15,7 @@
                                 <a href="javascript:void(0)">{{getTag(tag)}}</a>
                             </span>
                         </div>
-                        <div class="content-text1">
+                        <div class="content-text1 markdown-body">
                              <VueMarkdown :source="article.article" class="markdown-class"></VueMarkdown>
                         </div>
                 </div>

@@ -8,6 +8,7 @@ import axios from 'axios'
 import api from './axios/http'
 import VueMarkdown from 'vue-markdown'
 import myLoading from './components/loading'
+import 'github-markdown-css/github-markdown.css'
 
 
 Vue.use(Vuex)

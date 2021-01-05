@@ -6,8 +6,8 @@
                         <div class="content-title">
                                 <a href="javascript:void(0)" @click="jumpTo(item)">{{item.title}}</a>
                         </div>
-                        <div class="content-text">
-                            <VueMarkdown :source="getIntroduct(item.article)"></VueMarkdown>
+                        <div class="content-text markdown-body">
+                            <VueMarkdown :source="getIntroduct(item.article)" v-highlight></VueMarkdown>
                         </div>
                         <p class="p-readmore" @click="jumpTo(item)">
                             <a href="javascript:void(0)">
@@ -112,15 +112,6 @@
                 width: 100px !important;
             }
     }
-    .markdown-class h2{
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-    .markdown-class  p{
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
 </style>
 <style lang="scss" scoped>
 .container{
