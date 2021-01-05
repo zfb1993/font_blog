@@ -25,7 +25,7 @@
                         id="local-search-input"
                         v-on:keyup.enter="submit"
                         v-model="search"
-                        name="q" value="搜索"
+                        name="q"
                         onfocus="if(this.value=='搜索'){this.value='';}"
                         onblur="if(this.value==''){this.value='搜索';}">
                    </li>
@@ -42,7 +42,7 @@
         data(){
           return {
               curHeight:0,
-              search: ''
+              search: '搜索'
           }
         },
         methods:{
@@ -53,11 +53,16 @@
                 });
             },
             submit(){
+                this.$myLoading.open()
                 this.$api.getArticles({keyword:this.search}).then(res=>{
                     this.$store.commit('SetSearchData',res.data)
-                    this.$router.push({
-                        path:'search'
-                    })
+                    this.$myLoading.hide()
+                    console.log(this.$route.path)
+                    if(this.$route.path != '/search'){
+                        this.$router.push({
+                            path:'search'
+                        })
+                    }
                 })
             }
         }
