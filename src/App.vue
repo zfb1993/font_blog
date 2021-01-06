@@ -87,4 +87,7 @@ button, textarea, input, select {
 .markdown-body .highlight pre, .markdown-body pre {
     background-color: #222;
 }
+.markdown-body .highlight pre, .markdown-body pre {
+    background-color: #333 !important;
+}
 </style>
