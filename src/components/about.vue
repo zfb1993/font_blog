@@ -4,14 +4,41 @@
             <h1>
                 About
             </h1>
-            
+            <div class="content-text1 markdown-body">
+                    <VueMarkdown  v-highlight :source="article">
+                    </VueMarkdown>
+            </div>
         </section>
     </div>
 </template>
 
 <script>
+import VueMarkdown from 'vue-markdown'
+
 export default {
-    name:'about'
+    components:{VueMarkdown},
+    name:'about',
+    data(){
+        return {
+            article:'',
+        }
+    },
+    mounted(){
+        this.article = 
+        `
+            ## 技能清单
+            - Web开发：PHP
+            - Web框架：ThinkPHP/Lavarel
+            - 前端框架：Vue
+            - 前端工具：Sass/Less
+            - 数据库相关：MySQL/PDO/Elasticsearch
+            - 环境部署：docker/docker-compose
+
+            ## 2021学习计划
+            - java
+            - webpack
+        `
+    }
 }
 </script>
 
@@ -52,6 +79,11 @@ export default {
                             align-self: baseline;
                     }
                 }
+            }
+            .content-text1{
+                    padding-left: 20px;
+                    font-size: 15px;
+                    margin: 1.5em 0;
             }
         }
     }
