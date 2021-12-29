@@ -33,10 +33,6 @@ export default {
             - 前端工具：Sass/Less
             - 数据库相关：MySQL/PDO/Elasticsearch
             - 环境部署：docker/docker-compose
-
-            ## 2021学习计划
-            - java
-            - webpack
         `
     }
 }
